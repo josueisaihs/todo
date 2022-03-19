@@ -6,33 +6,6 @@ import { Fragment } from 'react/cjs/react.production.min';
 
 const KEY = "todosapp.tasks"
 
-const tasks_ = [
-  {
-    id: uuid(),
-    name: "Nueva tarea 1",
-    completed: true,
-    created: new Date()
-  },
-  {
-    id: uuid(),
-    name: "Nueva tarea 2",
-    completed: true,
-    created: new Date()
-  },
-  {
-    id: uuid(),
-    name: "Nueva tarea 3",
-    completed: true,
-    created: new Date()
-  },
-  {
-    id: uuid(),
-    name: "Nueva tarea 4",
-    completed: false,
-    created: new Date()
-  }
-]
-
 const App = () => {
   const newTask = useRef()
   const [tasks, setTasks] = useState([])
