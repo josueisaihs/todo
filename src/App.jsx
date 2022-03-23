@@ -140,7 +140,11 @@ const App = ({KEY}) => {
               ref={ newTask } 
               onKeyDown={ createTask }  />
 
-            <TodoList tasks={ tasks } deleteTask = { deleteTask } completedTask = { completedTask } setTasks = { setTasks } />
+            <TodoList 
+              tasks={ tasks } 
+              deleteTask = { deleteTask } 
+              completedTask = { completedTask } 
+              setTasks = { setTasks } />
           </div>      
         </motion.section>
         <motion.footer

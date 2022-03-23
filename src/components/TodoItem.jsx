@@ -75,9 +75,6 @@ export default function TodoItem({task, deleteTask, completedTask, index}) {
                         <input className="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" onChange={ onCompleted } checked = { task.completed }/>                        
                         <h4 className={ task.completed ? "text-decoration-line-through text-secondary" : ""}>{ task.name }</h4>
                     </motion.div>
-                    <AnimatePresence>
-                        <ExpandBtn isOpen={ isOpen } toggleOpen = { toggleOpen }/>
-                    </AnimatePresence>
                 </motion.div>
                 
                 <motion.div layout className='d-flex flex-column'>
@@ -92,8 +89,13 @@ export default function TodoItem({task, deleteTask, completedTask, index}) {
                     </motion.button>
                 </motion.div>                   
             </motion.div>
+
             <AnimatePresence>
                 { isOpen && <TodoItemDetail task = { task } /> }
+            </AnimatePresence>
+
+            <AnimatePresence>
+                <ExpandBtn isOpen={ isOpen } toggleOpen = { toggleOpen }/>
             </AnimatePresence>
         </motion.div>
     )

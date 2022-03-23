@@ -7,9 +7,16 @@ export default function TodoList({tasks, setTasks, deleteTask, completedTask }) 
         <div className='mt-4'>
              <AnimateSharedLayout>  
                 <motion.ul layout className='container'>
-                    { tasks.map((task, index) => (
-                                <TodoItem key={ task.id } task = { task } deleteTask = { deleteTask } completedTask = { completedTask } index = { index }/>           
-                    ))}
+                    { 
+                        tasks.map((task, index) => (
+                            <TodoItem 
+                                key={ task.id } 
+                                task = { task } 
+                                deleteTask = { deleteTask } 
+                                completedTask = { completedTask } 
+                                index = { index }/>           
+                        ))
+                    }
                 </motion.ul>           
             </AnimateSharedLayout>
         </div>       
