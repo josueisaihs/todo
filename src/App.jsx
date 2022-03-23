@@ -4,9 +4,20 @@ import { motion } from 'framer-motion'
 import TodoList from "./components/TodoList";
 import { Fragment } from 'react/cjs/react.production.min';
 
-const KEY = "todosapp.tasks"
+import './App.css'
 
-const App = () => {
+const transition = {
+  duration: .5,
+  ease: "easeInOut"
+}
+
+const mainVariants ={
+  initial: {scale: 0.9,  opacity: 0},
+  enter: {scale: 1, opacity: 1, transition},
+  exit: {scale: 0.5, opacity: 0, transition: { duration: 1.5, ...transition}}
+}
+
+const App = ({KEY}) => {
   const newTask = useRef()
   const [tasks, setTasks] = useState([])
 
@@ -31,6 +42,7 @@ const App = () => {
           newTasks.push({
             id: uuid(),
             name: task,
+            description: "",
             completed: false,
             created: new Date()
           })
@@ -46,13 +58,13 @@ const App = () => {
     ()=>{
       const storedTasks = JSON.parse(localStorage.getItem(KEY))
       if (storedTasks) setTasks(storedTasks)
-    }, []
+    }, [KEY]
   )
 
   useEffect(
     ()=>{
       localStorage.setItem(KEY, JSON.stringify(tasks))
-    }, [tasks]
+    }, [KEY, tasks]
   )
 
   const footer = () => {
@@ -99,39 +111,47 @@ const App = () => {
   }
 
   return (
-    <div className='d-flex flex-column' style={{ height: "100vh"}}>
-      <section className="container-fluid text-dark overflow-auto">
-        <motion.h1 
-          className='text-center my-4'
-          initial={{scale: 0}}
-          animate={{scale: 1}}
-          transition={{type: "spring"}}
-          style={{fontSize: "3rem"}}
-        >
-          TODOS
-        </motion.h1>
-        <div className=''>        
-          <motion.input 
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            transition={{type: "tween", delay: .2}} 
-            type="text" 
-            placeholder='Crear tarea' 
-            className='form-control' 
-            ref={ newTask } 
-            onKeyDown={ createTask }  />
+    <>    
+      <div 
+        className='d-flex flex-column' 
+        style={{ height: "100vh"}}>
+        <motion.section 
+          className="container-fluid text-dark overflow-auto"
+          initial="initial"
+          animate="enter"
+          exit="exit"
+          variants={mainVariants}>
+          <motion.h1 
+            className='text-center my-4'
+            initial={{scale: 0}}
+            animate={{scale: 1}}
+            transition={{type: "spring"}}
+            style={{fontSize: "3rem"}}>
+            TODO
+          </motion.h1>
+          <div className=''>        
+            <motion.input 
+              initial={{opacity: 0, y: -20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{type: "tween", delay: .2}} 
+              type="text" 
+              placeholder='Create Task' 
+              className='form-control' 
+              ref={ newTask } 
+              onKeyDown={ createTask }  />
 
-          <TodoList tasks={ tasks } deleteTask = { deleteTask } completedTask = { completedTask } setTasks = { setTasks } />
-        </div>      
-      </section>
-      <motion.footer
-        initial={{opacity: 0}}
-        animate={{opacity:1}}
-        transition={{duration: 1, delay: .5}}
-        className="d-flex justify-content-center mt-auto py-4 bg-light">
-        { footer() }        
-      </motion.footer>    
-    </div>    
+            <TodoList tasks={ tasks } deleteTask = { deleteTask } completedTask = { completedTask } setTasks = { setTasks } />
+          </div>      
+        </motion.section>
+        <motion.footer
+          initial={{opacity: 0, y: 20}}
+          animate={{opacity:1, y: 0}}
+          transition={{delay: .5}}
+          className="d-flex justify-content-center mt-auto py-4 bg-light">
+          { footer() }        
+        </motion.footer>    
+      </div>
+    </>
   );
 }
 
