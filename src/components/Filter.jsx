@@ -30,7 +30,7 @@ const Item = ({filter, changeFilter, index}) => {
             custom={{delay: (index + 1) * .1}} 
             whileHover={{scale: 1.03}}
             whileTap={{scale: 1.1}}
-            className={`btn btn-outline-${ filter.active ? "primary" : "dark"} px-3 py-1 rounded rounded-lg mx-1`} 
+            className={`btn btn-outline-${ filter.active ? "primary" : "dark"} px-3 py-1 rounded rounded-lg mx-1 my-1`} 
             onClick = { onClick }>
             { filter.name }
         </motion.button>
@@ -66,7 +66,7 @@ export default function Filter({changeFilterEvent}) {
     }
 
     return (
-        <motion.div layout initial={{opacity: 0}} animate={{opacity: 1, transitionDelay: 1.}} className='d-flex flex-row my-4 justify-content-center'>
+        <motion.div layout initial={{opacity: 0}} animate={{opacity: 1, transitionDelay: 1.}} className='d-flex flex-row flex-md-row flex-column my-4 justify-content-center'>
             {
                 filters.map(
                     (filter, index) => (
