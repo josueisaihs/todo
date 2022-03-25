@@ -137,7 +137,7 @@ const App = ({KEY}) => {
         className='d-flex flex-column' 
         style={{ height: "100vh"}}>
         <motion.section 
-          className="container-fluid text-dark overflow-auto pb-4"
+          className="container text-dark overflow-auto pb-4"
           initial="initial"
           animate="enter"
           exit="exit"
