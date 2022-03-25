@@ -123,7 +123,7 @@ const App = ({KEY}) => {
         className='d-flex flex-column' 
         style={{ height: "100vh"}}>
         <motion.section 
-          className="container-fluid text-dark overflow-auto"
+          className="container-fluid text-dark overflow-auto pb-4"
           initial="initial"
           animate="enter"
           exit="exit"
@@ -163,7 +163,7 @@ const App = ({KEY}) => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity:1, y: 0}}
           transition={{delay: .5}}
-          className="d-flex justify-content-center mt-auto py-4 bg-light">
+          className="d-flex justify-content-center mt-auto py-4 bg-light shadow-top">
           { footer() }        
         </motion.footer>    
       </div>
