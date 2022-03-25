@@ -23,6 +23,7 @@ const App = ({KEY}) => {
   const newTask = useRef()
   const [tasks, setTasks] = useState([])
   const [filter, setFilter] = useState("ALL")
+  const [typical, setTypical] = useState('')
 
   const deleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId))
@@ -117,6 +118,19 @@ const App = ({KEY}) => {
     setFilter(filter)
   }
 
+  useEffect(() => {
+    setTypical("MY LIST")
+
+    setTimeout(() => {
+      setTypical(
+        <Typical
+          steps = {['MY LIST', 5000, 'TO DO', 1000]}
+          loop = {1}
+          />
+        )
+    }, 1000)
+  }, [])
+
   return (
     <>    
       <div 
@@ -134,10 +148,7 @@ const App = ({KEY}) => {
             animate={{scale: 1}}
             transition={{type: "spring"}}
             style={{fontSize: "3rem"}}>
-            <Typical
-              steps = {['MY LIST', 5000, 'TO DO', 1000]}
-              loop = {1}
-            />
+            { typical }
           </motion.h1>
           <div className=''>        
             <motion.input 
