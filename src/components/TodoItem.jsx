@@ -66,7 +66,7 @@ export default function TodoItem({task, deleteTask, completedTask, index}) {
             exit="hidden"
             custom={{delay: (index + 1) * .1}}  
             layoutId={ task.id }
-            className='border rounded px-2 py-1 mb-1 bg-light'>
+            className='border rounded px-2 py-1 mb-1 bg-light shadow my-4'>
             <motion.div layout className="d-flex flex-row justify-content-between">
                 <motion.div
                     layout
