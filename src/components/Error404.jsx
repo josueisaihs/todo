@@ -22,7 +22,7 @@ export default function Error404() {
             <motion.div 
               initial={{y: 0}} 
               animate={{y: -10, transition: {delay: 1., repeat: Infinity, repeatType: "reverse", duration: 2.5, type: "tween"}}} >
-              <motion.i className='bi bi-asterisk'></motion.i>
+              <motion.i className='bi bi-asterisk text-danger'></motion.i>
             </motion.div>
             
             <span className='ms-2'>404</span>

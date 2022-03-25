@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, Fragment } from 'react'
 import { v4 as uuid } from 'uuid';
 import { motion } from 'framer-motion'
+import Typical from 'react-typical'
+
 import TodoList from "./components/TodoList";
-import { Fragment } from 'react/cjs/react.production.min';
 
 import './App.css'
+import Filter from './components/Filter';
 
 const transition = {
   duration: .5,
@@ -20,6 +22,7 @@ const mainVariants ={
 const App = ({KEY}) => {
   const newTask = useRef()
   const [tasks, setTasks] = useState([])
+  const [filter, setFilter] = useState("ALL")
 
   const deleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId))
@@ -110,6 +113,10 @@ const App = ({KEY}) => {
     }
   }
 
+  const changeFilterEvent = (filter) => {
+    setFilter(filter)
+  }
+
   return (
     <>    
       <div 
@@ -127,7 +134,10 @@ const App = ({KEY}) => {
             animate={{scale: 1}}
             transition={{type: "spring"}}
             style={{fontSize: "3rem"}}>
-            TODO
+            <Typical
+              steps = {['MY LIST', 5000, 'TO DO', 1000]}
+              loop = {1}
+            />
           </motion.h1>
           <div className=''>        
             <motion.input 
@@ -136,15 +146,17 @@ const App = ({KEY}) => {
               transition={{type: "tween", delay: .2}} 
               type="text" 
               placeholder='Create Task' 
-              className='form-control' 
+              className='form-control shadow' 
               ref={ newTask } 
               onKeyDown={ createTask }  />
+            
+            <Filter changeFilterEvent={ changeFilterEvent }/>
 
             <TodoList 
               tasks={ tasks } 
               deleteTask = { deleteTask } 
-              completedTask = { completedTask } 
-              setTasks = { setTasks } />
+              completedTask = { completedTask }
+              filter = { filter } />
           </div>      
         </motion.section>
         <motion.footer
